@@ -1,0 +1,6 @@
+step 1---- Get into the directory
+step2----- Type git init
+step3----- Type git status
+step 4---- git add foldername/
+step5------ git commit -m "message"
+step 6 ---- git log
