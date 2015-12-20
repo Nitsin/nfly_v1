@@ -19,7 +19,7 @@
           <div class="icon">
             <i class="ion ion-ios-cog"></i>
           </div>
-          <a href="<?php echo base_url(); ?>workshop" class="small-box-footer">All Workshops <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="<?php echo base_url(); ?>Landing" class="small-box-footer">All Workshops <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
@@ -34,7 +34,7 @@
           <div class="icon">
             <i class="ion ion-speakerphone"></i>
           </div>
-          <a href="<?php echo base_url();?>event" class="small-box-footer">All Events <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="#" class="small-box-footer">All Events <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
@@ -81,7 +81,7 @@
             ?>
             <h3 class="profile-username text-center"><?php echo $name; ?></h3>
 
-            <p class="text-muted text-center"><a href="#" data-toggle="modal" data-target="#myModal">Update Profile picture</a></p>
+            <p class="text-muted text-center">Administrator</p>
 
             <ul class="list-group list-group-unbordered">
               <li class="list-group-item">
@@ -103,11 +103,16 @@
       </div>
       <!-- Stacks -->
       <div class="col-md-6">
-        <div class="row stack_view">
+        <div class="row">
+          <?php if ($this->session->flashdata('msg') != ''){
+                        echo $this->session->flashdata('msg');
+                    }
+          ?>
           <?php
           foreach($stacks as $row)
           {
             echo "<div class=\"col-md-12\">";
+
             echo "<div class=\"box box-widget\">";
             echo  "<div class=\"box-header with-border\">";
             echo    "<div class=\"user-block\">";
@@ -117,7 +122,15 @@
             echo    "</div>";
                 
             echo    "<div class=\"box-tools\">";
+            echo "<div class=\"dropdown\">";
+            echo  "<a href=\"#\" data-toggle=\"dropdown\" class=\"dropdown-toggle\"> <b class=\"caret\"></b></a>";
+            echo  "<ul class=\"dropdown-menu\">";
+            echo      "<li><a href=\"".base_url()."Member_profile/edit_stack/".$row->news_stack_id."\">Edit Stack</a></li>";
+            echo      "<li><a href=\"#my_modal\" data-toggle=\"modal\" data-book-id=\"my_id_value\">Open Modal</a></li>";
+            echo  "</ul>&nbsp&nbsp&nbsp&nbsp";
+            
             echo      "<a href=\"".base_url()."stacks/index/".$row->stack_name."\"><span class=\"label label-danger\">".$row->stack_name."</span></a>";
+            echo "</div>";
             echo    "</div>";
                 
             echo  "</div>";
@@ -138,18 +151,10 @@
           }
           
           ?>
-          <!--page navigation-->
-          <div class="col-md-12 stack_view">
-            <?php if (isset($next)): ?>
-              <div class="nav_link">
-                <a href='<?php echo base_url(); ?>profile/stacks/<?php echo $next?>'>Next</a>
-              </div>
-            <?php endif?>
-          </div>
         </div>
       </div>
       <!-- Trending -->
-      <div class="col-md-3 trending">
+      <div class="col-md-3">
         <div class="box box-success">
           <div class="box-header with-border">
             <h3 class="box-title">Trending</h3>
@@ -188,35 +193,27 @@
           <!-- /.box-body -->
         </div>
       </div>
-      <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal" id="my_modal">
         <div class="modal-dialog">
-
-          <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Update your profile picture</h4>
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Modal header</h4>
             </div>
             <div class="modal-body">
-              <?php echo form_open_multipart('Profile/do_upload');?>
-
-                <input type="file" name="userfile" size="20" />
-
-                <br /><br />
-
-                <input type="submit" value="upload" />
-
-              </form>
+              <p>some content</p>
+              <input type="text" name="bookId" value=""/>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
           </div>
-
         </div>
       </div>
-    </div>
-  </section>  
+  </section>
+  
+  
+   
   <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->

@@ -23,7 +23,7 @@
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
     <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="icon" href="<?php echo base_url()?>/favicon.ico" type="image/ico">
+
 </head>
 
 <body>
@@ -54,6 +54,10 @@
       </div>
     </nav>
 
+
+
+    <!-- Header -->
+    <a name="about"></a>
     <div class="intro-header">
         <div class="container">
 
@@ -66,25 +70,22 @@
                 <div class="intro-message" style="margin-top:50px">
                     <?php
 
-                    echo form_open('Landing/login_validation');
-                    echo "<h4>Sign in to start your session</h4><br>";
-                    if ($this->session->flashdata('msg') != ''){
-                        echo $this->session->flashdata('msg');
-                    }
-                    echo "<br>"; 
+                    echo form_open('Register/reg_validation');
+                    echo "<h4>Sign up to create your account.</h4><br>";
                     echo validation_errors();
                     echo  "<div class=\"form-group\">";
-                    echo form_input('email', 'Enter your email',"class='form-control input-lg'");
+                    echo form_input('name', 'Tell us your name',"class='form-control input-lg'");
+                    echo  "</div>";
+                    echo  "<div class=\"form-group\">";
+                    echo form_input('email', 'Type your email',"class='form-control input-lg'");
                     echo  "</div>";
                     echo  "<div class=\"form-group\">";
                     echo form_password('password', 'password',"class='form-control input-lg'");
                     echo  "</div>";
-                    echo form_submit('loginSubmit', 'Sign in to nFLY',"class='btn btn-success btn-block btn-lg'");
+                    echo form_submit('regSubmit', 'Sign up for nFLY',"class='btn btn-success btn-block btn-lg'");
                     echo  "<br>";
                     
-                    echo    "<small style=\"padding-top:-10px\">Forgot your Password? <a href=\"".base_url()."Landing/forgot_password\">Reset Here</a></small><br>";
-                    echo    "<h4>Not a member? Sign up Now!<br><br>";
-                    echo    "<a href=\"".base_url()."Register\" class=\"btn btn-danger btn-block btn-lg\"><b>Sign up for nFLY</b></a></h4>";
+                    echo    "<small style=\"padding-top:-10px\">By clicking \"Sign up for nFLY\", you agree to our terms of service and privacy policy. We will send you account related emails occasionally.</small><br>";
                     echo form_close();
                     ?>
                 </div>
@@ -98,8 +99,6 @@
     </div>
     <script src="<?php echo base_url(); ?>plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <script src="<?php echo base_url(); ?>/bootstrap/js/bootstrap.js"></script>
-    
-     
 
 </body>
 

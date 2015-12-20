@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>nFly.in- Hypercubed You!</title>
+    <title>nFly.in- Members Login</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url(); ?>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -66,7 +66,7 @@
                 <div class="intro-message" style="margin-top:50px">
                     <?php
 
-                    echo form_open('Landing/login_validation');
+                    echo form_open('Manage/login_validation');
                     echo "<h4>Sign in to start your session</h4><br>";
                     if ($this->session->flashdata('msg') != ''){
                         echo $this->session->flashdata('msg');
@@ -82,9 +82,7 @@
                     echo form_submit('loginSubmit', 'Sign in to nFLY',"class='btn btn-success btn-block btn-lg'");
                     echo  "<br>";
                     
-                    echo    "<small style=\"padding-top:-10px\">Forgot your Password? <a href=\"".base_url()."Landing/forgot_password\">Reset Here</a></small><br>";
-                    echo    "<h4>Not a member? Sign up Now!<br><br>";
-                    echo    "<a href=\"".base_url()."Register\" class=\"btn btn-danger btn-block btn-lg\"><b>Sign up for nFLY</b></a></h4>";
+                    echo    "<h4 style=\"padding-top:-10px\">Forgot your Password? <a href=\"".base_url()."manage/forgot_password\">Reset Here</a></h4>";
                     echo form_close();
                     ?>
                 </div>

@@ -19,7 +19,7 @@
           <div class="icon">
             <i class="ion ion-ios-cog"></i>
           </div>
-          <a href="<?php echo base_url(); ?>workshop" class="small-box-footer">All Workshops <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="<?php echo base_url(); ?>Landing" class="small-box-footer">All Workshops <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
@@ -34,7 +34,7 @@
           <div class="icon">
             <i class="ion ion-speakerphone"></i>
           </div>
-          <a href="<?php echo base_url();?>event" class="small-box-footer">All Events <i class="fa fa-arrow-circle-right"></i></a>
+          <a href="#" class="small-box-footer">All Events <i class="fa fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
@@ -103,9 +103,9 @@
       </div>
       <!-- Stacks -->
       <div class="col-md-6">
-        <div class="row stack_view">
+        <div class="row">
           <?php
-          foreach($stacks as $row)
+          foreach($selected_stacks as $row)
           {
             echo "<div class=\"col-md-12\">";
             echo "<div class=\"box box-widget\">";
@@ -138,18 +138,10 @@
           }
           
           ?>
-          <!--page navigation-->
-          <div class="col-md-12 stack_view">
-            <?php if (isset($next)): ?>
-              <div class="nav_link">
-                <a href='<?php echo base_url(); ?>profile/stacks/<?php echo $next?>'>Next</a>
-              </div>
-            <?php endif?>
-          </div>
         </div>
       </div>
       <!-- Trending -->
-      <div class="col-md-3 trending">
+      <div class="col-md-3">
         <div class="box box-success">
           <div class="box-header with-border">
             <h3 class="box-title">Trending</h3>

@@ -18,7 +18,9 @@
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>/dist/css/skin-green.min.css">
   <link rel="icon" href="<?php echo base_url()?>/favicon.ico" type="image/ico">
-  
+ 
 </head>
-<body class="hold-transition skin-green sidebar-mini">
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+<body class="hold-transition skin-green layout-top-nav">
 <div class="wrapper">
+

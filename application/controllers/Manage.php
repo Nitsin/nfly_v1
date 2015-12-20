@@ -1,19 +1,11 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Landing extends CI_Controller {
+class Manage extends CI_Controller{
 
-	public function index()
-	{
-		if($this->session->userdata('is_logged_in')){
-			redirect('profile');
+	public function index(){
 
-		}else{
-			$this->load->view('view_landing');
-		}
-		
+		$this->load->view('members/member_login');
 	}
-	
 
 	public function login_validation(){
 
@@ -25,22 +17,22 @@ class Landing extends CI_Controller {
 
 			$data=array(
 				'email'=>$this->input->post('email'),
-				'is_logged_in'=>1
+				'is_logged_in'=>2 //2 for admin
 				);
 
 			$this->session->set_userdata($data);
-			redirect('Profile');
+			redirect('member_profile');
 		}else{
-			$this->load->view('view_landing');
+			$this->load->view('members/member_login');
 		}
 
 	}
 
 	public function validate_credentials(){
 
-		$this->load->model('model_users');
+		$this->load->model('model_members');
 
-		if($this->model_users->can_log_in()){
+		if($this->model_members->can_log_in()){
 
 			return true;
 
@@ -54,12 +46,12 @@ class Landing extends CI_Controller {
 
 	public function logout(){
 		$this->session->sess_destroy();
-		redirect('Landing');
+		redirect('manage');
 	}
 
 	public function forgot_password(){
 
-		$this->load->view('forgot_password');
+		$this->load->view('members/member_forgot_password');
 	}
 
 	public function reset_password_validation(){
@@ -70,32 +62,32 @@ class Landing extends CI_Controller {
 		if($this->form_validation->run()){
 
 			$this->load->library('email', array('mailtype'=>'html'));
-			$this->load->model('model_users');
+			$this->load->model('model_members');
 
 			//create key
 			$key=md5(uniqid());
 
 			//enter data to temp db
-			if($this->model_users->add_temp_user($key)){
+			if($this->model_members->add_temp_user($key)){
 
 				$this->email->from('support@nfly.in','nFLY');
 				$this->email->to($this->input->post('email'));
 				$this->email->subject("Password Reset");
 
 				$message="<p>Password reset request.</p>";
-				$message.="<p><a href=\"".base_url()."Landing/set_new_password/".$key."\">Click here</a> to reset your password.</p>";
+				$message.="<p><a href=\"".base_url()."Manage/set_new_password/".$key."\">Click here</a> to reset your password.</p>";
 
 				$this->email->message($message);
 
 				if($this->email->send()){
 
 					$this->session->set_flashdata('msg','Email sent successfully. Please check your inbox.');
-					redirect('Landing/forgot_password');
+					redirect('Manage/forgot_password');
 				}
 			}else{
 
 				$this->session->set_flashdata('msg','Email could not be sent. Please try again.');
-				redirect('Landing/forgot_password');
+				redirect('Manage/forgot_password');
 			}
 
 			//send email
@@ -111,27 +103,12 @@ class Landing extends CI_Controller {
 
 	}
 
-	public function email_available(){
-
-	    $this->load->model('model_users');
-	    $result =   $this->model_users->emailAvailability($this->input->post('email'));
-	    if ($result)
-	    {
-	        
-	        return True;
-	    }else{
-
-	    	$this->form_validation->set_message('email_available', 'The email does not exist');
-	        return False;
-	    }
-	}
-	
 	public function set_new_password($key){
 
 
 		$data=array('valid_key'=>$key);
 
-		$this->load->view('set_new_password', $data);
+		$this->load->view('members/set_new_password', $data);
 		
 
 	}
@@ -139,7 +116,7 @@ class Landing extends CI_Controller {
 	public function receive_key(){
 
 
-		$this->load->model('model_users');
+		$this->load->model('model_members');
 		$this->load->library('form_validation');
 
 		$this->form_validation->set_rules('password','Password','required|trim');
@@ -148,14 +125,14 @@ class Landing extends CI_Controller {
 
 		if($this->form_validation->run()){
 
-			if($this->model_users->replace_password($this->input->post('key'))){
+			if($this->model_members->replace_password($this->input->post('key'))){
 
 					$this->session->set_flashdata('msg','Password reset successful. Please login with your new password');
-					redirect('Landing');//can login now
+					redirect('Manage');//can login now
 				}else{
 
 					$this->session->set_flashdata('msg','Some error occured. Please try again.');
-					redirect('Landing/forgot_password');//something went wrong, send mail again.
+					redirect('Manage/forgot_password');//something went wrong, send mail again.
 				}
 
 		}
@@ -163,3 +140,7 @@ class Landing extends CI_Controller {
 
 	}
 }
+
+
+
+?>

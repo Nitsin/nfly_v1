@@ -16,9 +16,15 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>/dist/css/style.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>/dist/css/skin-green.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>/dist/css/skin-red.min.css">
   <link rel="icon" href="<?php echo base_url()?>/favicon.ico" type="image/ico">
   
 </head>
-<body class="hold-transition skin-green sidebar-mini">
+<script type="text/javascript">
+  $('#my_modal').on('show.bs.modal', function(e) {
+    var bookId = $(e.relatedTarget).data('book-id');
+    $(e.currentTarget).find('input[name="bookId"]').val(bookId);
+});
+  </script>
+<body class="hold-transition skin-red sidebar-mini">
 <div class="wrapper">
